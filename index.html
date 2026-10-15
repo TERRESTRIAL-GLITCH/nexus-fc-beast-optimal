@@ -1,0 +1,93 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXUS Football</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050506;--pn:#0e0f12;--ln:#23252b;--tx:#f3f5f7;--mu:#8b909a;--a:#19f58a;--g:#e8c26a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f5f7;--pn:#fff;--ln:#dcdfe5;--tx:#0a0b0d;--mu:#5d6370;--a:#0a8f50;--g:#9a7412}}
+:root[data-theme="dark"]{--bg:#050506;--pn:#0e0f12;--ln:#23252b;--tx:#f3f5f7;--mu:#8b909a;--a:#19f58a;--g:#e8c26a}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 Inter,system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+h1,h2,h3,.cn{font-family:"Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:0}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln)}
+.bi{max-width:1100px;margin:auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.lg{font:800 26px "Barlow Condensed",sans-serif;letter-spacing:.08em}.lg b{color:var(--a)}
+.tabs{margin-left:auto;display:flex;gap:8px}
+.tab{background:none;color:var(--tx);border:1px solid var(--ln);border-radius:999px;padding:8px 18px;font:700 14px "Barlow Condensed",sans-serif;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.tab.on{background:var(--a);color:#000;border-color:var(--a)}.tab.pr{border-color:var(--g);color:var(--g)}.tab.pr.on{background:var(--g);color:#000}
+main{max-width:1100px;margin:auto;padding:16px}
+.tk{overflow:hidden;white-space:nowrap;border-bottom:1px solid var(--ln);color:var(--mu);font-size:13px;padding:6px 0}.tk span{display:inline-block;padding-left:100%;animation:m 60s linear infinite}
+@keyframes m{to{transform:translateX(-100%)}}@media (prefers-reduced-motion:reduce){.tk span{animation:none;padding:0}}
+.chips{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap;align-items:center}
+.chip{border:1px solid var(--ln);background:var(--pn);color:var(--mu);border-radius:999px;padding:6px 14px;cursor:pointer;font:inherit;font-size:13px}.chip.on{color:var(--tx);border-color:var(--a)}
+.hero{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--a) 14%,var(--pn)),var(--pn) 60%);border:1px solid var(--ln);border-radius:18px;padding:24px;margin-bottom:16px}
+.hero h2{font-size:clamp(28px,5vw,48px);line-height:1.02;margin:8px 0 12px}
+.tag{display:inline-block;background:var(--g);color:#000;font:800 12px "Barlow Condensed",sans-serif;letter-spacing:.12em;padding:2px 8px;border-radius:4px;margin-right:8px}
+.meta{color:var(--mu);font-size:13px}.go{display:inline-block;margin-top:12px;color:var(--a);text-decoration:none;font-weight:600}
+.ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.nc{background:var(--pn);border:1px solid var(--ln);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.nc.big{border-color:color-mix(in srgb,var(--g) 60%,var(--ln))}.nc h3{font-size:22px;line-height:1.1;text-transform:none;font-weight:800}
+.nc a{color:inherit;text-decoration:none}.nc a:hover{color:var(--a)}.nh{display:flex;gap:10px;align-items:center}
+.cr{flex:none;display:grid;place-items:center;font-family:"Barlow Condensed",sans-serif;font-weight:800;color:#fff}.cr img{width:100%;height:100%;object-fit:contain}.cr.sh{clip-path:polygon(0 0,100% 0,100% 62%,50% 100%,0 62%);padding-bottom:6%}
+.sel,.fl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:14px 0}select,input[type=range]{background:var(--pn);color:var(--tx);border:1px solid var(--ln);border-radius:8px;padding:8px 10px;font:inherit}
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.pc{background:var(--pn);border:1px solid var(--ln);border-radius:16px;padding:16px}.pc.hot{border-color:var(--g)}
+.pt{display:flex;justify-content:space-between;color:var(--mu);font-size:12px}
+.pm{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-top:12px;text-align:center}
+.pm .tm{display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:600;font-size:14px}
+.ring{--p:50;width:74px;height:74px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--a) calc(var(--p)*1%),var(--ln) 0)}.hot .ring{background:conic-gradient(var(--g) calc(var(--p)*1%),var(--ln) 0)}
+.ring i{width:60px;height:60px;border-radius:50%;background:var(--pn);display:grid;place-items:center;font:800 22px "Barlow Condensed",sans-serif;font-style:normal}
+.fo{text-align:center;color:var(--mu);font-size:12px;margin-top:10px}
+button.ld,.fb{border:1px solid var(--ln);background:var(--pn);color:var(--tx);border-radius:8px;padding:8px 12px;cursor:pointer;font:inherit;font-size:13px}.fb input{display:none}
+footer{color:var(--mu);font-size:12px;margin:28px 0 10px}.hide{display:none}
+@media(max-width:560px){.hero{grid-template-columns:1fr}.tabs{margin-left:0;width:100%}.tab{flex:1}}
+</style></head><body>
+<div class="bar"><div class="bi"><div class="lg">NEXUS<b>.</b>FC</div><div class="tabs"><button class="tab on" id="tn">News</button><button class="tab" id="ts">Stars</button><button class="tab pr" id="tp">Predictions ▸</button></div></div></div>
+<main>
+<div class="tk"><span id="tk"></span></div>
+<section id="vn"><div class="chips" id="ch"></div><div id="hero"></div><div class="ng" id="ng"></div></section>
+<section id="vp" class="hide"><div class="fl"><select id="lgs"></select><label class="meta">Min BTTS <input id="mn" type="range" min="40" max="70" value="40"> <span id="mv">40%</span></label><select id="so"><option value="p">Highest chance</option><option value="d">Date</option></select></div><div class="pg" id="pg"></div></section>
+<section id="vs" class="hide"><div class="meta" id="sm"></div><div class="ng" id="sg"></div></section>
+<div class="fl"><label class="fb">Load data (.json)<input id="fi" type="file" accept=".json"></label><button class="ld" id="rs">Reset</button><span class="meta" id="meta"></span></div>
+<footer>Predictions come from a model on bookmaker 1X2 and over/under 2.5 odds (test AUC about 0.58). It ranks matches and does not prove an edge over bookmakers. News is from Google News and may lag; verify before acting. 18+, gamble responsibly.</footer>
+</main><script>
+const SAMPLE={generated:"SAMPLE DATA",logos:{},fixtures:[["Norwich","Southampton","Championship",69.1],["Cardiff","Watford","Championship",62.5],["Stoke","Middlesbrough","Championship",60.6],["Mansfield","Oxford","League One",60.4],["Millwall","Swansea","Championship",59],["Wolves","Bolton","Championship",54.3]].map(f=>({date:"2026-10-14",league:f[2],home:f[0],away:f[1],p:f[3]/100,fair:+(100/f[3]).toFixed(2),news:[]})),
+headlines:[{t:"DEMO: star striker fitness update appears here once you load news",src:"Run Colab Cell 7",url:"",big:true,team:"Demo Star"},{t:"DEMO: team news for your fixtures appears here",src:"Run Colab Cell 7",url:"",big:false,team:"Demo Team"}]};
+let D=SAMPLE,view="n",nf="all";try{const s=localStorage.getItem("nexus2");if(s)D=JSON.parse(s)}catch(e){}
+const $=i=>document.getElementById(i),el=(t,c,x)=>{const e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=x;return e};
+const ok=u=>/^https?:\/\//.test(u||"");
+const hue=s=>{let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return h};
+const ago=s=>{if(!s)return"";const m=(Date.now()-new Date(s))/6e4;return isNaN(m)?"":m<60?Math.max(1,~~m)+"m ago":m<1440?~~(m/60)+"h ago":~~(m/1440)+"d ago"};
+function crest(n,sz){n=n||"?";const w=el("div","cr");w.style.cssText=`width:${sz}px;height:${sz}px;font-size:${sz*.38}px`;const u=D.logos&&D.logos[n];
+if(u&&/^data:image\//.test(u)){const i=new Image();i.src=u;i.alt=n;w.append(i)}else{w.classList.add("sh");w.style.background=`linear-gradient(135deg,hsl(${hue(n)} 65% 45%),hsl(${(hue(n)+45)%360} 65% 22%))`;w.textContent=n.replace(/[^A-Za-z ]/g," ").split(" ").filter(Boolean).slice(0,2).map(s=>s[0]).join("").toUpperCase()||"?"}return w}
+function items(){const seen=new Set(),o=[...(D.headlines||[])];D.fixtures.forEach(f=>(f.news||[]).forEach(n=>o.push({...n,team:f.home+" v "+f.away,ct:f.home})));
+return o.filter(h=>h.t&&!seen.has(h.t)&&seen.add(h.t)).sort((a,b)=>(b.big?1:0)-(a.big?1:0))}
+function story(h,big){const t=el("h"+(big?2:3),0);const a=el(ok(h.url)?"a":"span",0,h.t);if(ok(h.url)){a.href=h.url;a.target="_blank";a.rel="noopener"}t.append(a);return t}
+function drawNews(){let L=items();if(nf=="big")L=L.filter(h=>h.big);if(nf=="team")L=L.filter(h=>!h.big);
+const hr=$("hero"),g=$("ng");hr.replaceChildren();g.replaceChildren();if(!L.length){g.append(el("div","meta","No stories in this filter."));return}
+const h=L[0],box=el("div","hero"),body=el("div");box.append(crest(h.ct||h.team,92));const m=el("div","meta");if(h.big)m.append(el("span","tag","BIG NAME"));m.append((h.team||"")+(h.src?" | "+h.src:"")+" "+ago(h.ts));body.append(m,story(h,1));
+if(ok(h.url)){const a=el("a","go","Read full story ▸");a.href=h.url;a.target="_blank";a.rel="noopener";body.append(a)}box.append(body);hr.append(box);
+L.slice(1).forEach(x=>{const c=el("div","nc"+(x.big?" big":"")),hd=el("div","nh");hd.append(crest(x.ct||x.team,40));const m=el("div","meta");if(x.big)m.append(el("span","tag","BIG"));m.append((x.team||"")+" "+ago(x.ts));hd.append(m);c.append(hd,story(x,0),el("div","meta",x.src||""));g.append(c)})}
+function drawPred(){const mn=$("mn").value/100,lg=$("lgs").value;$("mv").textContent=$("mn").value+"%";
+let f=D.fixtures.filter(x=>x.p>=mn&&(lg=="All"||x.league==lg));f.sort($("so").value=="p"?(a,b)=>b.p-a.p:(a,b)=>a.date.localeCompare(b.date));
+const g=$("pg");g.replaceChildren();if(!f.length)g.append(el("div","meta","No fixtures match. Lower the filter or load fresh data."));
+f.forEach(x=>{const c=el("div","pc"+(x.p>=.6?" hot":"")),t=el("div","pt");t.append(el("span",0,x.league),el("span",0,x.date));
+const m=el("div","pm"),h=el("div","tm"),a=el("div","tm"),r=el("div","ring");h.append(crest(x.home,46),el("span",0,x.home));a.append(crest(x.away,46),el("span",0,x.away));
+r.style.setProperty("--p",Math.round(x.p*100));r.append(el("i",0,Math.round(x.p*100)+"%"));m.append(h,r,a);c.append(t,m,el("div","fo","Both teams to score | fair odds "+x.fair+(x.p>=.6?" | HOT":"")));g.append(c)});}
+function chips(){const c=$("ch");c.replaceChildren();[["all","All"],["big","Big names"],["team","Team news"]].forEach(([k,l])=>{const b=el("button","chip"+(nf==k?" on":""),l);b.onclick=()=>{nf=k;chips();drawNews()};c.append(b)})}
+function fillLg(){const s=$("lgs");s.replaceChildren(new Option("All leagues","All"));[...new Set(D.fixtures.map(x=>x.league))].forEach(l=>s.append(new Option(l,l)))}
+function ticker(){const b=items().filter(h=>h.big).map(h=>h.t).join("   //   ");$("tk").textContent=b||"Load your news file to see big-name headlines here";$("meta").textContent="Data: "+D.generated+" | "+D.fixtures.length+" fixtures"}
+function show(v){view=v;$("vn").classList.toggle("hide",v!="n");$("vs").classList.toggle("hide",v!="s");$("vp").classList.toggle("hide",v!="p");["n","s","p"].forEach(k=>$("t"+k).classList.toggle("on",v==k));scrollTo(0,0)}
+function drawStars(){const S=(D.stars||[]).slice().sort((a,b)=>(b.scored-a.scored)||(b.stories.length-a.stories.length)),g=$("sg");g.replaceChildren();
+$("sm").textContent=S.length?"Players in the headlines. SCORED means a recent headline mentions a goal. Verify in the story.":"No star data yet. Load the file from Colab Cell 7 (stars version).";
+S.forEach(s=>{const c=el("div","nc"+(s.scored?" big":"")),hd=el("div","nh");hd.append(crest(s.club,44));const m=el("div");m.append(el("h3",0,s.name),el("div","meta",s.club));hd.append(m);
+if(s.scored){const t=el("span","tag","⚽ SCORED");t.style.marginLeft="auto";hd.append(t)}c.append(hd);
+(s.stories||[]).slice(0,2).forEach(h=>{const d=el("div"),a=el(ok(h.url)?"a":"span",0,h.t);if(ok(h.url)){a.href=h.url;a.target="_blank";a.rel="noopener"}d.append(a,el("div","meta",(h.src||"")+" "+ago(h.ts)));c.append(d)});g.append(c)})}
+$("tn").onclick=()=>show("n");$("ts").onclick=()=>show("s");$("tp").onclick=()=>show("p");["lgs","mn","so"].forEach(i=>$(i).addEventListener("input",drawPred));
+$("fi").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;f.text().then(s=>{const j=JSON.parse(s);if(!j.fixtures)throw 0;D=j;try{localStorage.setItem("nexus2",s)}catch(x){}init()}).catch(()=>alert("That file is not valid dashboard data."))});
+$("rs").onclick=()=>{try{localStorage.removeItem("nexus2")}catch(e){}location.reload()};
+function init(){fillLg();chips();ticker();drawNews();drawStars();drawPred()}init();
+/* on GitHub Pages, auto-load dashboard_data.json sitting next to this page */
+fetch("dashboard_data.json",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.fixtures){D=j;init()}}).catch(()=>{});
+</script></body></html>
