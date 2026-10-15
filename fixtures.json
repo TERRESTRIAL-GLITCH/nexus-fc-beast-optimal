@@ -1,0 +1,19 @@
+{
+  "updated": "2026-10-16",
+  "fixtures": [
+    {"date":"2026-10-17","time":"15:00","league":"EPL","home":"Arsenal","away":"Brighton","btts":58,"odds_yes":1.80,"odds_no":2.00,"home_badge":"","away_badge":"","news":"Saka back in training ahead of Saturday"},
+    {"date":"2026-10-17","time":"17:30","league":"EPL","home":"Chelsea","away":"Newcastle","btts":64,"odds_yes":1.67,"odds_no":2.20,"home_badge":"","away_badge":"","news":"Both sides scored in last four meetings"},
+    {"date":"2026-10-17","time":"20:00","league":"La Liga","home":"Real Madrid","away":"Sevilla","btts":49,"odds_yes":1.95,"odds_no":1.85,"home_badge":"","away_badge":"","news":""},
+    {"date":"2026-10-18","time":"14:00","league":"Serie A","home":"Inter","away":"Napoli","btts":61,"odds_yes":1.75,"odds_no":2.05,"home_badge":"","away_badge":"","news":"Two top-four sides, both attack-minded"},
+    {"date":"2026-10-18","time":"16:30","league":"Bundesliga","home":"Dortmund","away":"Leipzig","btts":72,"odds_yes":1.50,"odds_no":2.60,"home_badge":"","away_badge":"","news":""},
+    {"date":"2026-10-19","time":"21:00","league":"Ligue 1","home":"PSG","away":"Lille","btts":44,"odds_yes":2.10,"odds_no":1.70,"home_badge":"","away_badge":"","news":""}
+  ],
+  "news": [
+    {"title":"Saka passes fitness test","source":"Example News","url":"#"},
+    {"title":"Messi extends scoring run","source":"Example News","url":"#"}
+  ],
+  "stars": [
+    {"name":"Bukayo Saka","team":"Arsenal","note":"In the headlines this week","photo":"images/stars/saka.jpg"},
+    {"name":"Lionel Messi","team":"Inter Miami","note":"In the headlines this week","photo":"images/stars/messi.jpg"}
+  ]
+}

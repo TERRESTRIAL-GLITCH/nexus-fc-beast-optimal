@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXUS.FC – Football fixtures and BTTS picks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E1A2B; --surface:#16263D; --line:#26405F; --chalk:#F2EFE6; --muted:#9FB0C6;
+  --amber:#FFB020; --turf:#3FB27F; --clay:#E0715B;
+  --head:'Barlow Condensed','Arial Narrow',sans-serif; --body:'Barlow',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--chalk);font:16px/1.5 var(--body)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+
+/* HERO: put your picture at images/hero.jpg */
+.hero{position:relative;min-height:260px;display:flex;align-items:flex-end;
+  background:linear-gradient(180deg,rgba(14,26,43,.2),var(--bg) 95%),url("images/hero.jpg") center/cover,
+  linear-gradient(135deg,#1d3a5c,#0E1A2B)}
+.hero .wrap{padding-top:28px;padding-bottom:24px;width:100%}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.brand img{height:44px;width:auto}              /* logo: images/logo.png */
+.brand b{font:700 34px/1 var(--head);letter-spacing:.5px}
+.brand b i{font-style:normal;color:var(--amber)}
+.hero p{color:var(--muted);max-width:46ch}
+
+.controls{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 0}
+.row{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.chip{flex:none;border:1px solid var(--line);background:transparent;color:var(--chalk);
+  padding:8px 14px;border-radius:999px;font:600 15px var(--body);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:#1b1300}
+.search{width:100%;margin-top:8px;padding:11px 14px;border-radius:10px;border:1px solid var(--line);
+  background:var(--surface);color:var(--chalk);font:16px var(--body)}
+
+h2{font:700 26px/1.1 var(--head);margin:28px 0 12px}
+.day{color:var(--muted);font:600 15px var(--body);margin:20px 0 8px}
+
+.card{display:grid;grid-template-columns:64px 1fr 120px;gap:14px;align-items:center;
+  background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+.time{font:700 22px var(--head);color:var(--amber)}
+.lg{display:block;color:var(--muted);font-size:13px}
+.teams{display:grid;gap:6px}
+.team{display:flex;align-items:center;gap:10px;font-weight:600}
+.badge{width:28px;height:28px;border-radius:50%;background:var(--line);flex:none;object-fit:contain;
+  display:grid;place-items:center;font:700 12px var(--head);color:var(--chalk)}
+.news{grid-column:2/4;color:var(--muted);font-size:14px}
+.pick b{font:700 28px/1 var(--head)}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:6px 0 4px}
+.bar i{display:block;height:100%}
+.tag{font-size:13px;font-weight:600}
+.hi{--c:var(--turf)} .mid{--c:var(--amber)} .lo{--c:var(--clay)}
+.pick b,.tag{color:var(--c)} .bar i{background:var(--c)}
+.odds{color:var(--muted);font-size:12px}
+
+.stars{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.star{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.star .ph{aspect-ratio:1;background:var(--line);display:grid;place-items:center;font:700 40px var(--head)}
+.star img{width:100%;height:100%;object-fit:cover}
+.star div:last-child{padding:10px}.star small{color:var(--muted)}
+.headlines a{display:block;padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.headlines small{color:var(--muted)}
+.empty{padding:24px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px}
+footer{color:var(--muted);font-size:13px;padding:32px 0 48px}
+
+@media(max-width:520px){
+  .card{grid-template-columns:1fr 100px}
+  .time{grid-column:1/3}.teams{grid-column:1}.pick{grid-column:2;grid-row:2}.news{grid-column:1/3}
+}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <div class="brand">
+    <img src="images/logo.png" alt="" onerror="this.remove()">
+    <b>NEXUS<i>.FC</i></b>
+  </div>
+  <p>Upcoming fixtures with a both-teams-to-score probability for each match.</p>
+</div></header>
+
+<div class="controls"><div class="wrap">
+  <div class="row" id="leagues" aria-label="Filter by league"></div>
+  <div class="row" id="days" aria-label="Filter by day" style="margin-top:8px"></div>
+  <input class="search" id="q" type="search" placeholder="Search a team" aria-label="Search a team">
+</div></div>
+
+<main class="wrap">
+  <h2>Fixtures</h2>
+  <section id="list" aria-live="polite"></section>
+  <h2>Players in the headlines</h2>
+  <section class="stars" id="stars"></section>
+  <h2>Latest news</h2>
+  <section class="headlines" id="news"></section>
+  <footer id="foot">BTTS probabilities are model estimates, not guarantees. Bet responsibly and only if you are 18 or over.</footer>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const state={league:'All',day:'All',q:'',data:null};
+const iso=d=>d.toISOString().slice(0,10);
+const today=iso(new Date()), tomorrow=iso(new Date(Date.now()+864e5));
+
+function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e}
+function chips(box,items,key){
+  box.replaceChildren();
+  items.forEach(v=>{
+    const b=el('button','chip',v);b.type='button';
+    b.setAttribute('aria-pressed',state[key]===v);
+    b.onclick=()=>{state[key]=v;render()};
+    box.append(b);
+  });
+}
+function badge(name,url){
+  if(url){const i=el('img','badge');i.src=url;i.alt='';i.onerror=()=>i.replaceWith(badge(name,''));return i}
+  return el('span','badge',name.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase());
+}
+function level(p){return p>=60?['hi','Likely']:p>=50?['mid','Toss-up']:['lo','Unlikely']}
+
+function card(f){
+  const c=el('article','card');
+  const t=el('div','time',f.time);t.append(el('span','lg',f.league));
+  const teams=el('div','teams');
+  [[f.home,f.home_badge],[f.away,f.away_badge]].forEach(([n,u])=>{
+    const r=el('div','team');r.append(badge(n,u),el('span','',n));teams.append(r);
+  });
+  const [cls,word]=level(f.btts);
+  const pick=el('div','pick '+cls);
+  pick.append(el('b','',f.btts+'%'),el('div','tag','Both score: '+word));
+  const bar=el('div','bar');const fill=el('i');fill.style.width=f.btts+'%';bar.append(fill);pick.append(bar);
+  if(f.odds_yes)pick.append(el('div','odds','Yes '+f.odds_yes.toFixed(2)+' · No '+f.odds_no.toFixed(2)));
+  c.append(t,teams,pick);
+  if(f.news)c.append(el('p','news',f.news));
+  return c;
+}
+
+function render(){
+  const d=state.data;if(!d)return;
+  chips($('leagues'),['All',...new Set(d.fixtures.map(f=>f.league))],'league');
+  chips($('days'),['All','Today','Tomorrow'],'day');
+  const q=state.q.toLowerCase();
+  const rows=d.fixtures.filter(f=>
+    (state.league==='All'||f.league===state.league)&&
+    (state.day==='All'||(state.day==='Today'&&f.date===today)||(state.day==='Tomorrow'&&f.date===tomorrow))&&
+    (!q||(f.home+' '+f.away).toLowerCase().includes(q))
+  ).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  const box=$('list');box.replaceChildren();
+  if(!rows.length){box.append(el('div','empty','No fixtures match. Try "All" or clear the search.'));return}
+  let last='';
+  rows.forEach(f=>{
+    if(f.date!==last){last=f.date;
+      box.append(el('div','day',new Date(f.date+'T12:00').toLocaleDateString('en-GB',{weekday:'long',day:'numeric',month:'long'})))}
+    box.append(card(f));
+  });
+}
+
+function renderExtras(d){
+  const s=$('stars');s.replaceChildren();
+  (d.stars||[]).forEach(p=>{
+    const a=el('div','star'),ph=el('div','ph');
+    const i=el('img');i.src=p.photo;i.alt=p.name;
+    i.onerror=()=>{i.remove();ph.textContent=p.name[0]};
+    ph.append(i);
+    const b=el('div');b.append(el('b','',p.name),el('br'),el('small','',p.team+' · '+p.note));
+    a.append(ph,b);s.append(a);
+  });
+  const n=$('news');n.replaceChildren();
+  (d.news||[]).forEach(x=>{
+    const a=el('a');a.href=x.url;a.target='_blank';a.rel='noopener';
+    a.append(el('span','',x.title),el('br'),el('small','',x.source));n.append(a);
+  });
+}
+
+$('q').addEventListener('input',e=>{state.q=e.target.value;render()});
+fetch('fixtures.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{
+  state.data=d;render();renderExtras(d);
+  $('foot').prepend('Updated '+d.updated+'. ');
+}).catch(()=>{
+  $('list').append(el('div','empty','Could not load fixtures.json. Open this page from your Cloudflare link, not by double-clicking the file.'));
+});
+</script>
+</body>
+</html>
